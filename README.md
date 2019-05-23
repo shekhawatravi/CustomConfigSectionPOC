@@ -155,6 +155,28 @@
 #### Reading the Above configuration's 'section' named as 'QAQCConfigSection'
 ```
 QAQCConfigSection section = ConfigurationManager.GetSection("QAQCConfigSection") as QAQCConfigSection;
+
+// Printing whatever is there in the section
+Console.WriteLine("Printing whatever is there in the section...");
+for (int i = 0; i < section.Bundles.Count; i++)
+{
+    Console.WriteLine("{0} - {1}", section.Bundles[i].Name, section.Bundles[i].Alias);
+    Console.WriteLine("Layers ::");
+    for (int j = 0; j < section.Bundles[i].Layers.Count; j++)
+    {
+        LayerElement lyr = section.Bundles[i].Layers[j];
+        Console.WriteLine($"{lyr.Name}");
+
+        Console.WriteLine("Fields ::");
+        for (int k = 0; k < lyr.Fields.Count; k++)
+        {
+            FieldElement fld = lyr.Fields[k];
+            Console.WriteLine($"Key: {fld.Key} => Value: {fld.Value}");
+        }
+        Console.WriteLine("---------------");
+    }
+    Console.WriteLine("------------------------------------------------------");
+}
 ```
 #### Pre-requisite
 1. Add Reference of *'System.configuration'* library in your projects.
